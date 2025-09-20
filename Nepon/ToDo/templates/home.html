@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Список задач</title>
+    <style>
+        body {
+            background-color: #0d1b2a; /* тёмно-синий фон */
+            color: #e0e1dd;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        p {
+            background-color: #13525e; /* тёмно-зелёный фон у блока */
+            border-left: 5px solid #40916c; 
+            border-radius: 10px;
+            padding: 10px 15px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+            transition: transform 0.2s ease-in-out;
+        }
+
+        p:hover {
+            transform: scale(1.02);
+        }
+
+        .completed {
+            color: #52b788;
+            font-weight: bold;
+        }
+
+        .not-completed {
+            color: #e63946;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Мои задачи</h1>
+
+    {%  for tasks in task  %}
+    <p>
+        {{tasks.title}} —
+        {% if tasks.completed %}
+            <span class="completed">✔ Выполнено</span>
+        {% else %}
+            <span class="not-completed">✘ Не выполнено</span>
+        {% endif %}
+        <br>
+        Дата: {{tasks.created_at}}
+    </p>
+    {%   endfor   %}
+
+</body>
+</html>
