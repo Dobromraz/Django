@@ -12,9 +12,54 @@
             padding: 20px;
         }
 
+        h1 {
+            color: #95d5b2;
+            margin-bottom: 20px;
+        }
+
+        /* форма */
+        form {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        form input {
+            flex: 1;
+            padding: 10px;
+            border: 2px solid #1e6091; /* тёмный небесный цвет */
+            border-radius: 8px;
+            background-color: #0d1b2a; /* тёмно-синий фон */
+            color: #e0e1dd;
+            font-size: 16px;
+            outline: none;
+            transition: border 0.3s ease;
+        }
+
+        form input:focus {
+            border-color: #52b788; /* зелёный при фокусе */
+        }
+
+        form button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            background-color: #13525e; /* тёмно-зелёный */
+            color: #e0e1dd;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        form button:hover {
+            background-color: #52b788; /* ярко-зелёный при наведении */
+            transform: scale(1.05);
+        }
+
+        /* карточки задач */
         p {
             background-color: #13525e; /* тёмно-зелёный фон у блока */
-            border-left: 5px solid #40916c; 
+            border-left: 5px solid #1e6091; /* небесная полоска */
             border-radius: 10px;
             padding: 10px 15px;
             margin-bottom: 10px;
@@ -39,8 +84,13 @@
 </head>
 <body>
     <h1>Мои задачи</h1>
+    <form action="{% url 'add' %}" method="post">
+        {% csrf_token %}
+        <input type="text" placeholder="Новая задача..." name="title" required>
+        <button>Добавить</button>
+    </form>
 
-    {%  for tasks in task  %}
+    {% for tasks in task %}
     <p>
         {{tasks.title}} —
         {% if tasks.completed %}
@@ -51,7 +101,7 @@
         <br>
         Дата: {{tasks.created_at}}
     </p>
-    {%   endfor   %}
-
+    {% endfor %}
 </body>
 </html>
+    

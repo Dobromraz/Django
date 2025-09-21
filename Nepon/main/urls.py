@@ -17,8 +17,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from ToDo.views import home
-
+from ToDo.views import add_task
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', home),
+    #http://127.0.0.1:8000/
+    path('', home,name='home'),
+    #http://127.0.0.1:8000/add
+    path('add/', add_task, name='add'),
 ]
